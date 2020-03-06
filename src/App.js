@@ -17,6 +17,12 @@ class App extends React.Component {
     }
     const decoded = jwtDecode(token)
     console.log(decoded)
+
+    const user = await axios.get('http://localhost:3001/users/me', {
+      headers: {
+        Authorization: 'Bearer '+token
+      }
+    })
   }
   render() {
     return (
