@@ -5,6 +5,7 @@ export const INITIAL_STATE = {
     isAuthing: false,
     isAuth: false,
     isSigningin: false,
+    isSaving: false,
     user: {},
     error: false,
     errorMessage: ''
@@ -68,6 +69,36 @@ export const destroyAuthSuccess = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const updateProfileRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state, 
+        isSaving: true,
+        error: false,
+        errorMessage: ''
+    }
+}
+export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
+    const newUser = {
+        ...state.user
+    }
+    Object.keys(action.user).forEach(key => {
+        newUser[key] = action.user[key]
+    })
+    return {
+        ...state,
+        isSigningin: false,
+        user: newUser
+    }
+}
+export const updateProfileFailure = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isSaving: false,
+        error: true,
+        errorMessage: action.error
+    }
+}
+
 export const HANDLERS = {
     [Types.SIGNIN_REQUEST]: signinRequest,
     [Types.SIGNIN_SUCCESS]: signinSuccess,
@@ -77,7 +108,12 @@ export const HANDLERS = {
     [Types.AUTH_SUCCESS]: authSuccess, 
     [Types.AUTH_FAILURE]: authFailure, 
 
-    [Types.DESTROY_AUTH_SUCCESS]: destroyAuthSuccess
+    [Types.DESTROY_AUTH_SUCCESS]: destroyAuthSuccess,
+
+    [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
+    [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
+    [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure
+
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

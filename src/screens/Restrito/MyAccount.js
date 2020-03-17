@@ -25,6 +25,13 @@ class MyAccount extends Component {
             [fieldname]: event.target.value
         })
     }
+    handleSave = () => {
+        this.props.save({
+            unit: this.state.unit,
+            timezone: this.state.timezone,
+            id: this.props.auth.user.id
+        })
+    }
     render() {
         return (
             <div>
@@ -42,7 +49,7 @@ class MyAccount extends Component {
                             })
                     }
                 </select>
-                <Button onClick={() => this.props.create()}>Salvar</Button>
+                <Button onClick={this.handleSave}>Salvar</Button>
             </div>
         )
     }
@@ -56,8 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // load: () => dispatch(ActionCreators.getRunsRequest()),
-        // create: (run) => dispatch(ActionCreators.createRunRequest(run))
+        save: (user) => dispatch(ActionCreators.updateProfileRequest(user))
     }
 }
 

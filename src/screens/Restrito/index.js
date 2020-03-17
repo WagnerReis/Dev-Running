@@ -8,6 +8,9 @@ import Header from './elements/Header'
 import MyAccount from './MyAccount'
 
 const Restrito = props => {
+    if(props.auth.isSigningin) {
+        return <p>Loading...</p>
+    }
     if (!props.auth.isAuth) {
         return <Redirect to='/login' />
     }
