@@ -6,6 +6,7 @@ export const INITIAL_STATE = {
     isAuth: false,
     isSigningin: false,
     isSaving: false,
+    saved: false,
     user: {},
     error: false,
     errorMessage: ''
@@ -74,7 +75,8 @@ export const updateProfileRequest = (state = INITIAL_STATE, action) => {
         ...state, 
         isSaving: true,
         error: false,
-        errorMessage: ''
+        errorMessage: '',
+        saved: false
     }
 }
 export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
@@ -87,7 +89,8 @@ export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         isSigningin: false,
-        user: newUser
+        user: newUser,
+        saved: true
     }
 }
 export const updateProfileFailure = (state = INITIAL_STATE, action) => {
@@ -95,7 +98,15 @@ export const updateProfileFailure = (state = INITIAL_STATE, action) => {
         ...state,
         isSaving: false,
         error: true,
-        errorMessage: action.error
+        errorMessage: action.error,
+        saved: false
+    }
+}
+export const updateProfileReset = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        isSaving: false,
+        saved: false
     }
 }
 
@@ -112,7 +123,8 @@ export const HANDLERS = {
 
     [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
     [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
-    [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure
+    [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure,
+    [Types.UPDATE_PROFILE_RESET]: updateProfileReset
 
 }
 
