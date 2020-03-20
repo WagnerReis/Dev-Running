@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
-import { Button, Segment, Form, Label } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
+import InputMoment from 'input-moment'
+import moment from 'moment'
+import momentTz from 'moment-timezone'
+import 'input-moment/dist/input-moment.css'
 
 class CreateRun extends Component {
     state = {
         friendly_name: '',
         duration: 0,
         distance: 0,
-        created: new Date(),
+        created: moment(),
         error: ''
     }
     componentDidMount() {
@@ -20,11 +24,15 @@ class CreateRun extends Component {
         })
     }
     handleSave = () => {
+        const d = moment.tz(this.state.created, this.props.auth.user.timezone)
+        const d2 = d.clone().utc().format('YYYY-MM-DD H:mm:ss')
+        console.log(d2)
+        const distance = this.state.distance
         this.props.create({
             friendly_name: this.state.friendly_name,
             duration: this.state.duration,
-            distance: this.state.distance,
-            created: this.state.created
+            distance: this.props.auth.user.unit === 'metric' ? distance : distance * 1.60934,
+            created: d2
         })
     }
     render() {
@@ -47,9 +55,15 @@ class CreateRun extends Component {
                         </Form.Field>
                         <Form.Field>
                             <label>Criação:</label>
-                            <input type='text' value={this.state.created} onChange={this.handleChange('created')} />
+                            <input type='text' value={this.state.created.format('DD/MM/YYYY H:mm:ss')} onChange={this.handleChange('created')} />
                         </Form.Field>
-                        <Button onClick={this.handleSave}>Criar corrida</Button>
+                        <InputMoment
+                            moment={this.state.created}
+                            onChange={(val) => this.setState({ created: val })}
+                        />
+                        <div>
+                            <Button onClick={this.handleSave}>Criar corrida</Button>
+                        </div>
                     </Form>
                 }
             </div>
