@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
-import { Button, Segment, Form, Label } from 'semantic-ui-react'
+import { Button, Segment, Form } from 'semantic-ui-react'
 
 class ChangePass extends Component {
     state = {

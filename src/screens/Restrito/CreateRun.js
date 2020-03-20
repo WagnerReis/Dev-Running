@@ -63,7 +63,7 @@ class CreateRun extends Component {
                         />
                         <div>
                             <Button onClick={this.handleSave}>Criar corrida</Button>
-                        </div>
+                        </div>  
                     </Form>
                 }
             </div>

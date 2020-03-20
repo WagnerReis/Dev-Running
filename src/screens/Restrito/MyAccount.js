@@ -5,10 +5,6 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 
 import timezones from 'moment-timezone/data/meta/latest.json'
 
-import Duration from '../elements/Duration'
-import Distance from '../elements/Distance'
-import DateStr from '../elements/DateStr'
-
 class MyAccount extends Component {
     state = {
         unit: '',

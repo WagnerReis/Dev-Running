@@ -13,9 +13,8 @@ const Header = props => {
         <Menu>
         <Menu.Item as={Link} to='/'><Image src={logo} size='small' /></Menu.Item>
             <Menu.Item as={Link} to='/'>Home</Menu.Item>
-            <Menu.Item as={Link}  to='/admin'>Admin</Menu.Item>
-            <Menu.Item as={Link}  to='/restrito'>Restrito</Menu.Item>
-            <Menu.Item as={Link}  to='/login'>Login</Menu.Item>
+            <Menu.Item as={Link}  to='/create-account'>Criar uma conta</Menu.Item>
+            <Menu.Item as={Link}  to='/login'>Entrar</Menu.Item>
         </Menu>
     )
 }
