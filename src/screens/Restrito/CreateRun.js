@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ActionCreators from '../../redux/actionCreators'
 import { connect } from 'react-redux'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Segment } from 'semantic-ui-react'
 import InputMoment from 'input-moment'
 import moment from 'moment'
-import momentTz from 'moment-timezone'
+import { Redirect } from 'react-router-dom'
 import 'input-moment/dist/input-moment.css'
 
 class CreateRun extends Component {
@@ -36,10 +36,14 @@ class CreateRun extends Component {
         })
     }
     render() {
+        if(this.props.runs.saved) {
+            return <Redirect to='/restrito/runs' />
+        }
         return (
             <div>
                 <h1>Criar corrida</h1>
-                {!this.props.auth.saved &&
+                { this.props.runs.saved && <Segment color='green'>Corrida criada com sucesso!</Segment>}
+                {!this.props.runs.saved &&
                     <Form>
                         <Form.Field>
                             <label>Nome:</label>
@@ -73,14 +77,15 @@ class CreateRun extends Component {
 
 const mapStateToProps = state => {
     return {
-        auth: state.auth
+        auth: state.auth,
+        runs: state.runs
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         create: (run) => dispatch(ActionCreators.createRunRequest(run)),
-        reset: () => dispatch(ActionCreators.updateProfileReset())
+        reset: () => dispatch(ActionCreators.createRunReset())
     }
 }
 
