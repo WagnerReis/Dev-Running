@@ -19,6 +19,10 @@ export const {
     getRunsSuccess: ['runs'],
     getRunsFailure: null,
 
+    getUsersRequest: null,
+    getUsersSuccess: ['users'],
+    getUsersFailure: null,
+
     createRunReset: null,
     createRunRequest: ['run'],
     createRunSuccess: ['run'],
@@ -27,6 +31,10 @@ export const {
     removeRunRequest: ['id'],
     removeRunSuccess: ['id'],
     removeRunFailure: ['error'],
+
+    removeUserRequest: ['id'],
+    removeUserSuccess: ['id'],
+    removeUserFailure: ['error'],
 
     updateProfileReset: null,
     updateProfileRequest: ['user'],
