@@ -11,12 +11,14 @@ import logo from '../../../assets/logo.png'
 const Header = props => {
     return (
         <Menu>
-        <Menu.Item as={Link} to='/'><Image src={logo} size='small' /></Menu.Item>
+            <Menu.Item as={Link} to='/'><Image src={logo} size='small' /></Menu.Item>
             <Menu.Item as={Link} to='/admin'>Home</Menu.Item>
-            <Menu.Item as={Link}  to='/admin/users'>Usuários</Menu.Item>
+            <Menu.Item as={Link} to='/admin/users'>Usuários</Menu.Item>
+            <Menu.Item as={Link} to='/admin/runs'>Corridas</Menu.Item>
             <Menu.Menu position='right'>
                 <Dropdown item text={props.auth.user.name}>
                     <Dropdown.Menu>
+                        <Dropdown.Item as={Link} to='/restrito'>Modo: usuário</Dropdown.Item>
                         <Dropdown.Item>Minha Conta</Dropdown.Item>
                         <Dropdown.Item>Alterar senha</Dropdown.Item>
                         <Dropdown.Item onClick={props.logout}>Sair</Dropdown.Item>
